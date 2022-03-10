@@ -1,0 +1,42 @@
+
+import { useState } from "react";
+import { isBuzz } from "../utils/isBuzz";
+import {isFizz} from  "../utils/isFizz";
+import {isFizzBuzz} from  "../utils/isFizzBuzz";
+export default function FizzBuzzer(): JSX.Element {
+
+    const [counterValue, NewCounterValue] =
+    useState(1);
+
+    const [StoreCounterValue, StoreNewCounterValue] =
+    useState<(string|number)[]>([]);
+
+    const handleAddOneToCounter = () => {
+      NewCounterValue(counterValue + 1)
+      const state = FizzBuzzLogic(counterValue)
+      StoreNewCounterValue([...StoreCounterValue,state]);
+    }
+     
+
+    return (
+        <>
+          <h1>Fizz Buzz</h1>
+          <p>Counter: {[StoreCounterValue]}</p>
+          <button onClick={handleAddOneToCounter}>NEXT</button>
+        </>
+      );
+}
+
+function FizzBuzzLogic(counterValue: number): string|number {
+  let state: string|number = ''
+    if (isFizzBuzz(counterValue)){
+     state = "FizzBuzz"
+    } else if (isFizz(counterValue)) {
+     state = "Fizz"
+    } else if (isBuzz(counterValue)) {
+     state = "Buzz"
+    } else {
+     state = counterValue
+    }
+    return state
+}
