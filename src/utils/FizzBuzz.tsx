@@ -10,8 +10,7 @@ function FizzBuzz(): JSX.Element {
   //adds one to current number and adds corresponding FizzBuzz state to storage
   const addNext = () => {
     queueRenderForNextNumber(currentNumber + 1);
-    const state = fizzBuzzLogic(currentNumber);
-    logNextFizzBuzzNumber((prev) => [...prev, state]);
+    logNextFizzBuzzNumber((prev) => [...prev, fizzBuzzLogic(currentNumber)]);
   };
 
   //maps storage to
@@ -21,7 +20,7 @@ function FizzBuzz(): JSX.Element {
     <>
       <h1>Let's Play FizzBuzz</h1>
       <p>Just click next to reveal the number</p>
-      <ul style={{ listStyleType: "none" }}>{fizzBuzzLayout}</ul>
+      <ul style={{ listStyleType: "none" }}>{fizzBuzzLayout} </ul>
       <button onClick={addNext}>NEXT</button>
     </>
   );
@@ -30,7 +29,7 @@ function FizzBuzz(): JSX.Element {
 function fbStorage(number: string | number): JSX.Element {
   return (
     <>
-      <li style={{ fontSize: 20 }}>{number}</li>
+      <li style={{ fontSize: 20, display: "inline-block" }}> {number}, </li>
     </>
   );
 }
